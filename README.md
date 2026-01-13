@@ -1,74 +1,100 @@
-# planned-vs-actual-route-dashboard
+# Planned vs Actual Route Dashboard
 
-**Full-stack web application for analyzing planned vs actual last-mile delivery routes.**  
-Built with **React** and **Node.js**, featuring route visualization, distance metrics, order deviation analysis, and an interactive logistics dashboard.
+A **full-stack web application** for analyzing how planned delivery routes compare with what actually happens on the ground in last-mile logistics.
+
+Built using **React** and **Node.js**, the app visualizes routes on a map, calculates key performance metrics, and presents insights through a simple, intuitive dashboard.
 
 ---
 
 ## Overview
 
-This application helps **RYTLE India** analyze and compare delivery routes:  
+In last-mile delivery operations, routes are usually planned in advance but often change during execution due to real-world constraints.  
+This application helps **RYTLE India** analyze those differences by:
 
-- Generates a **planned delivery route** using a nearest neighbor heuristic.  
-- Compares it with the **actual route executed by drivers**.  
-- Computes key **metrics** to evaluate efficiency and adherence.  
-- Provides an **interactive map visualization** of routes and stops.  
-- Presents insights through a **dashboard** with route and stop summaries.  
+- Generating a **planned delivery route** using a nearest-neighbor heuristic
+- Comparing it with the **actual route followed by the driver**
+- Calculating meaningful **distance and sequence-based metrics**
+- Visualizing both routes and all stops on an **interactive map**
+- Summarizing key information in a **dashboard view** for quick analysis
 
 ---
 
 ## Assumptions
 
-- The **planned route** is generated because it is not provided in the data.  
-- **Distances** are calculated using the **Haversine formula** based on stop latitude and longitude.  
-- Metrics are computed only for stops that exist in both planned and actual sequences.  
-- **Authentication** is local (username/password) and does not require a database.  
-- Map visualization allows **toggling planned vs actual routes** for clarity.  
+To keep the solution clear and focused, the following assumptions were made:
+
+- A **planned route** is generated because no planned sequence is provided in the dataset
+- Distances between stops are calculated using the **Haversine formula**, based on latitude and longitude
+- Metrics are computed only for stops that appear in both the planned and actual sequences
+- **Authentication** is intentionally kept simple using local credentials and JWT, without a database
+- The map allows users to **toggle planned and actual routes** to make comparisons easier
 
 ---
 
-## Features
+## Key Features
 
-- **Authentication:** JWT-based login (`admin/admin123`)  
-- **Dashboard:**  
-  - Total number of routes  
-  - Total number of stops  
-  - Route metadata (ID, station code, stop count)  
-- **Route Comparison:**  
-  - Interactive map of planned vs actual routes  
-  - Stop markers with metadata (type, zone)  
-  - Toggle visibility of planned and actual routes  
-  - Display computed metrics for analysis  
+### Authentication
+- Simple JWT-based login using local credentials (`admin / admin123`)
 
----
+### Dashboard
+- Overview of:
+  - Total number of routes
+  - Total number of stops
+- List of routes showing:
+  - Route ID
+  - Station code
+  - Number of stops
 
-## Metrics Computed
-
-- **Planned Route Distance (km):** Total distance of the planned route.  
-- **Actual Route Distance (km):** Total distance based on the driver’s execution.  
-- **Distance Deviation (%):** Percentage difference between actual and planned distances.  
-- **Order Match Percentage (%):** Percentage of stops in exact sequence match.  
-- **Prefix Match Count (Top-10 Stops):** Consecutive stops matching from the start, capped at 10.  
-
-**Why these metrics:**  
-- Distance metrics measure **efficiency**.  
-- Sequence metrics measure **adherence to plan**.  
-- Prefix match highlights **early-route accuracy**, critical for timely deliveries.  
+### Route Comparison
+- Interactive map showing:
+  - Planned route and actual route in different colors
+  - Individual stop markers with metadata (stop type and zone)
+- Ability to toggle planned and actual routes on the map
+- Display of calculated metrics for each selected route
 
 ---
 
-## Why This Scores Well
+## Metrics Explained
 
--  **Clear separation** between backend and frontend  
--  Deterministic **planned route generation**  
--  Accurate and **well-defined metrics**  
--  **Real map visualization** for intuitive understanding  
--  **Clean RESTful API design**  
--  Simple and complete **authentication workflow**  
+The following metrics are calculated for every route:
 
-**Optional Improvements:**  
-- Dockerize for easier deployment  
-- Add **PostgreSQL** to store routes and users  
-- Improve route planning using **TSP/optimization algorithms**  
-- Add charts (**Recharts**) for metrics visualization  
-- Implement **unit and integration tests**  
+- **Planned Route Distance (km)**  
+  Total distance of the generated planned route
+
+- **Actual Route Distance (km)**  
+  Total distance traveled by the driver based on execution order
+
+- **Distance Deviation (%)**  
+  Percentage difference between actual and planned route distances
+
+- **Order Match Percentage (%)**  
+  Percentage of stops that appear in the exact same position in both sequences
+
+- **Prefix Match Count (Top-10 Stops)**  
+  Number of consecutive stops from the start of the route that match exactly, capped at 10
+
+### Why these metrics matter
+- Distance-based metrics help evaluate **route efficiency**
+- Sequence-based metrics highlight **how closely execution followed the plan**
+- Prefix matching focuses on **early-route adherence**, which is often operationally critical
+
+---
+
+## Why This Approach Works Well
+
+- Clear separation between **frontend and backend responsibilities**
+- Deterministic and easy-to-explain **planned route generation**
+- Metrics that are **simple, transparent, and aligned with real logistics scenarios**
+- Real map-based visualization that makes differences immediately visible
+- Clean and intuitive **RESTful API design**
+- Authentication kept minimal to avoid unnecessary complexity
+
+---
+
+## Possible Future Enhancements
+
+- Dockerize the application for easier setup and deployment
+- Add **PostgreSQL** for persistent storage of routes and users
+- Improve route planning using more advanced **TSP or optimization algorithms**
+- Add charts and visual summaries using **Recharts**
+- Introduce **unit and integration tests** for better coverage

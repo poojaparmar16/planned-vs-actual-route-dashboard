@@ -59,12 +59,12 @@ This application helps **RYTLE India** analyze and compare delivery routes:
 
 ## Why This Scores Well
 
-- ✅ **Clear separation** between backend and frontend  
-- ✅ Deterministic **planned route generation**  
-- ✅ Accurate and **well-defined metrics**  
-- ✅ **Real map visualization** for intuitive understanding  
-- ✅ **Clean RESTful API design**  
-- ✅ Simple and complete **authentication workflow**  
+-  **Clear separation** between backend and frontend  
+-  Deterministic **planned route generation**  
+-  Accurate and **well-defined metrics**  
+-  **Real map visualization** for intuitive understanding  
+-  **Clean RESTful API design**  
+-  Simple and complete **authentication workflow**  
 
 **Optional Improvements:**  
 - Dockerize for easier deployment  
